@@ -1,0 +1,6 @@
+[client]
+loose-local-infile=1
+
+[mysqld]
+local-infile=1
+default_authentication_plugin=mysql_native_password

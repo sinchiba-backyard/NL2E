@@ -1,0 +1,10 @@
+FROM ubuntu:20.04
+ENV DEBCONF_NOWARNINGS=yes
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update
+RUN apt-get install -y x11-apps 
+
+COPY entrypoint.sh /
+
+CMD ["/entrypoint.sh"]

@@ -1,0 +1,5 @@
+FROM test-khcoder:v4
+
+COPY entrypoint.sh /
+
+CMD ["/entrypoint.sh"]
