@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   nl2e:
-    image: 'test-khcoder:v5'
+    image: 'sinby/nl2e:v0.0'
     environment:
         DISPLAY: $DISPLAY
     depends_on:
@@ -22,5 +22,5 @@ services:
       - ./db_data:/var/lib/mysql
 
 volumes:
-    db_data:
     KHCoder:
+    db_data:

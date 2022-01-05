@@ -1,0 +1,22 @@
+diff --git a/kh_lib/mysql_exec.pm b/kh_lib/mysql_exec.pm
+index d6de051c..e49e982e 100644
+--- a/kh_lib/mysql_exec.pm
++++ b/kh_lib/mysql_exec.pm
+@@ -46,7 +46,7 @@ sub dsn_gen{
+ }
+ 
+ sub connect_common{
+-	my $dsn = &dsn_gen("mysql");
++	my $dsn = &dsn_gen("khcoder");
+ 	$dbh_common = DBI->connect($dsn,$username,$password)
+ 		or gui_errormsg->open(type => 'mysql', sql => 'Connect');
+ 	#print "Created a shared connection to MySQL.\n";
+@@ -100,7 +100,7 @@ sub connection_test{
+ 	print "Checking MySQL connection...\n";
+ 	my $if_error = 0;
+ 	
+-	my $dsn = &dsn_gen("mysql");
++	my $dsn = &dsn_gen("khcoder");
+ 	my $dbh = DBI->connect($dsn,$username,$password) or $if_error = 1;
+ 
+ 	unless ($if_error){
