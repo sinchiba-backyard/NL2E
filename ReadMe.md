@@ -46,4 +46,4 @@ sql_host      172.30.0.2
 % unzip -x tutorial_data_3x.zip
 ```
 
-![khcoder](khcoder.jpg)
+![khcoder](khcoder.png)

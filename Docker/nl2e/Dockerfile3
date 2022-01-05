@@ -1,0 +1,6 @@
+FROM sinby/nl2e:v0.0
+
+COPY mecabrc /etc/mecabrc
+COPY entrypoint.sh /
+
+CMD ["/entrypoint.sh"]
