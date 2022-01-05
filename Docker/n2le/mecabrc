@@ -16,5 +16,5 @@ dicdir = /var/lib/mecab/dic/debian
 
 ; ChaSen
 node-format-chasen = %m\t%f[7]\t%f[6]\t%F-[0,1,2,3]\t%f[4]\t%f[5]\n
-unk-format-chasen  = %m\t%m\t%m\t%F-[0,1,2,3]\t\t\n
+unk-format-chasen  = %m\t%m\t%m\tUNKNOWN\t\t\n
 eos-format-chasen  = EOS\n
