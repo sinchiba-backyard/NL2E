@@ -5,7 +5,16 @@ docker-compose up したのち次の複雑な作業をする。
 
 ## khcoder のインストール
 mysql 8.0.27 対応にしたのでオリジナルに対してパッチが必要。
-なお、この mysql はパスワード等セキュリティを甘くしていることに注意。
+これはもともとの khcoder が DB 名として mysql をつかっているため。
+mysql は mysql のおおもとの DB 名称。mysql 8.0.27 では
+セキュリティ的に厳しくなったので mysql は使わない方がよい。
+
+固定的に khcoder にした。本来なら、config から名称を引っ張ってくる
+必要がある。
+
+なお、この変更の為 mysql で初期化が必要になった。
+create database と create user と grant。
+特に grant はセキュリティに関わるので注意。
 
 ```
 $ git submodule init
