@@ -1,0 +1,98 @@
+gui_window/main/menu.pm
+    をみればメニューがわかる
+
+project を new すると呼ばれる
+
+kh_project.pm
+    prepare_db
+
+    辞書テーブル
+    dmark これ前処理の前に聞いてくる
+    dstop これ前処理の前に聞いてくる
+
+    状態テーブル
+    status
+        ('morpho',0) 形態素解析
+        ('bun',0), 文？
+        ('dan',0), 段落？
+        ('h5',0),
+        ('h4',0),
+        ('h3',0),
+        ('h2',0),
+        ('h1',0)
+
+    status_char
+        last_tani
+        last_codf
+        icode つかってなさそうだけど
+        target ファイル名？
+        comment コメントかな？
+
+    外部変数用
+    outvar
+        name, tab, col, tani
+    outvar_lab
+        var_id, val, lab, id
+
+        
+前処理の実行?
+    は run_prep 
+
+    mc_morpho から mc_morpho_exec
+    use screen_code::negationchecker;
+    
+    mysql_ready->first($reload);
+        これが実体かな？mysql_ready.pm にあった。
+        各フォーマットから読み込んでいます。
+        対応フォーマットは
+            excel, docx, doc, rtf, odt
+
+            excel の場合はやっぱり col_name が必要なのね。
+
+            status_copied_file
+                なんだろう？excel はコピーしているのか？
+                コンバートしてコピーしているみたい
+                あ～ Excel のときはなんか構造を持っていて --cell-- とか
+                している。たぶんドキュメントに書いてある。
+    :project_obj->status_morpho <= これが(1)でよばれる？
+        引数を みて定義されていたら status を更新？
+        単なるステータス更新だった
+
+    first で分かち書きするのか？
+    read_hinshi_setting
+        config にあるファイルを DB として扱っているみたい
+        よくみると config の下にDB 名と一緒のディレクトリがあって
+        そこに csv やら txt がある。これが解析結果かな？
+
+        hinshi_mecab というファイルがあるので
+        これが番号と品詞の組み合わせ
+
+        プロジェクト内の既存の品詞選択
+        でいったん hselection を読み込んで drop_table して
+            再構築しているみたい
+
+        よくわからんが先に行く
+
+    kh_dictio->readin->mark
+        で dmark dstop hselection を MYSQL から読んでいるみたい
+        ここからもしファイルがあったら dmark と dstop をよみこんでいる
+        そういえば前処理にあったよねその項目
+
+    あとは順に作業をしていくみたいよ。
+    kh_morpho->run;
+        ./kh_morpho/linux.pm _run
+            ./kh_morpho/linux/mecab.pm _run_morpho
+                これで形態素解析するのかな？
+                ファイルに落ちるみたい
+
+        ./kh_morpho/win32.pm _run
+
+    形態素解析したものを読み込む？
+    入力は _mph.txt
+    _ch.txt が結果
+
+    self->readin
+        ファイルから読み込んだものを mysql の
+        rowdata という table にいれているぽい
+
+        ここで mysql の local infile をつかっているのか
