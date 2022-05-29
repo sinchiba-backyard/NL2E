@@ -27,27 +27,15 @@ $ patch -p1 << ../../khcoder.diff
 ```
 
 ## mysql の設定
-docker の inspect でみた IP アドレスを使う。
-mysql の初期設定をする。khcoder という user 名に
-すべての権限を与えているのに注意(どうやればいいかわからなかったので)。
 
 ```
 $ docker cp mysql.txt nl2e_nl2e_1:/
-$ docker inspect nl2e_mysql_1
 $ docker exec -it nl2e_nl2e_1 /bin/bash
-# mysql --host 172.XX.0.2 -u root -p < mysql.txt
+# mysql --host 0.0.0.0 -P 13306 -u root -p < mysql.txt
 # cd /KHCoder/khcoder/
 # /usr/bin/perl ./kh_coder.pl
 ```
 
-## KH Coder の一旦起動と coder.ini の書き換え
-そして一旦  KH Coder を立ち上げると KHCoder/khcoder/config/coder.ini
-が作成される。それを少し編集する。特に IP アドレス。
-docker の inspect でみた IP アドレスを使う。
-
-```
-sql_host      172.30.0.2
-```
 
 ## チュートリアルをやってみる
 
