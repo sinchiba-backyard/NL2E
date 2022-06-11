@@ -9,20 +9,31 @@ services:
     volumes:
       - './KHCoder:/KHCoder'
       - '$HOME/.Xauthority:/root/.Xauthority'
+    networks:
+      nl2e_net:
+        ipv4_address: '171.20.0.2'
   mysql:
     platform: linux/amd64
-    build: ./Docker/mysql
+    image: mysql:8.0.27
     environment:
       MYSQL_ROOT_PASSWORD: khcoder
-      MYSQL_DATABASE: khcoder
-      MYSQL_USER: khcoder
-      MYSQL_PASSWORD: khcoder
     ports:
       - '13306:3306'
     cap_add:
       - SYS_NICE
     volumes:
       - ./db_data:/var/lib/mysql
+      - ./Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    networks:
+      nl2e_net:
+        ipv4_address: '171.20.0.3'
+networks:
+  nl2e_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 171.20.0.0/24
 volumes:
     KHCoder:
     db_data:
