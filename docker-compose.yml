@@ -3,23 +3,26 @@ services:
   nl2e:
     image: 'sinby/nl2e:v0.1'
     environment:
-        DISPLAY: host.docker.internal:0
+      DISPLAY: host.docker.internal:0
     depends_on:
-        - mysql
+      - mysql
     volumes:
       - './KHCoder:/KHCoder'
       - '$HOME/.Xauthority:/root/.Xauthority'
   mysql:
-    image: 'sinby/mysql-for-khcoder:8.0.27'
-    cap_add:
-      - SYS_NICE
+    platform: linux/amd64
+    build: ./Docker/mysql
     environment:
-        MYSQL_ROOT_PASSWORD: 'khcoder'
+      MYSQL_ROOT_PASSWORD: khcoder
+      MYSQL_DATABASE: khcoder
+      MYSQL_USER: khcoder
+      MYSQL_PASSWORD: khcoder
     ports:
       - '13306:3306'
+    cap_add:
+      - SYS_NICE
     volumes:
       - ./db_data:/var/lib/mysql
-
 volumes:
     KHCoder:
     db_data:
