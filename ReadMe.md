@@ -56,4 +56,14 @@ $ docker exec -it nl2e_nl2e_1 /bin/bash # dockerに入る
 $ docker-compose down                   # dockerコンテナ終了
 ```
 
+## macOSの場合
+
+- [XQuartz](https://www.xquartz.org/)をインストールする
+- XQuartzの環境設定「セキュリティ」タブで、「接続を認証」のチェックを外し、「ネットワーク・クライアントからの接続を許可」にチェックを入れ、XQuartzを再起動する
+- docker-compose.ymlの「DISPLAY: $DISPLAY」という箇所を「DISPLAY: host.docker.internal:0」に変更して上書き保存
+- コンテナ名の「nl2e_nl2e_1」が、「nl2e-nl2e-1」になるなど、コンテナ名のアンダーバーがハイフンにかわることがある
+
+参考URL
+https://zenn.dev/hogenishi/articles/6bcffa389bcfb6
+
 ![khcoder](khcoder.png)
